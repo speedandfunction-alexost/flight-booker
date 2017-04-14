@@ -1,0 +1,22 @@
+<h1>Flights#index</h1>
+<p>Find me in app/views/flights/index.html.erb</p>
+
+
+		<h5> Find your voyage </h5>
+<%= form_tag("/flights/index", method: "get") do %>
+	<%= select_tag :from, options_for_select(@airports),  prompt: "From" %>
+	<%= select_tag :to, options_for_select(@airports),  prompt: "To" %>
+	<%= submit_tag "Search", class: "btn btn-success" %>
+			<% end %>
+
+        <% @flights.each do |flight| %>
+            <tr>
+              <td><%= check_box_tag :flight_id, flight.id %></td>
+              <td><%= flight.id %></td>
+              <td><%= flight.dep.strftime("%B %d, %Y")  %></td>
+              <td><%= flight.dep.strftime('%I:%M:%S %p') %></td>
+              <td><%= flight.from_airport.city %></td>
+              <td><%= flight.to_airport.city %></td>
+            </tr>
+        <% end %>
+      <%= submit_tag "Select Flight", class: "button" %>
