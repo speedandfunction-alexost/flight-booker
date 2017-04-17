@@ -1,0 +1,16 @@
+<h1>Bookings#new</h1>
+<p>Find me in app/views/bookings/new.html.erb</p>
+
+
+
+<%= form_for(@booking) do |f| %>
+        <%= f.hidden_field :flight_id %>
+          <legend>Passengers Information</legend>
+          <%= f.fields_for :passengers do |passenger| %>
+                  <%= passenger.label :name %>
+                  <%= passenger.text_field :name %>
+                  <%= passenger.label :email %>
+                  <%= passenger.email_field :email %>
+          <% end %>
+        <%= f.submit "Book Flight", class: "button" %>
+<% end %>

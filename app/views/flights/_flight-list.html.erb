@@ -1,0 +1,14 @@
+<%= form_tag bookings_new_path, method: 'get' do %>
+        	<% @flights.each do |flight| %>  
+            <tr>
+              <td><%= radio_button_tag :flight_id, flight.id %></td>
+              <td><%= flight.id %></td>
+              <td><%= flight.dep.strftime("%B %d, %Y")  %></td>
+              <td><%= flight.dep.strftime('%I:%M:%S %p') %></td>
+              <td><%= flight.from_airport.city %></td>
+              <td><%= flight.to_airport.city %></td>
+               <%= select_tag :num_passengers, options_for_select(@passengers), prompt: "passengers" %>
+            </tr>
+            <% end %>
+              <%= submit_tag "Select Flight", class: "button" %>
+      <% end %>

@@ -1,5 +1,3 @@
-<h1>Flights#index</h1>
-<p>Find me in app/views/flights/index.html.erb</p>
 
 
 		<h5> Find your voyage </h5>
@@ -9,14 +7,16 @@
 	<%= submit_tag "Search", class: "btn btn-success" %>
 			<% end %>
 
-        <% @flights.each do |flight| %>
-            <tr>
-              <td><%= check_box_tag :flight_id, flight.id %></td>
-              <td><%= flight.id %></td>
-              <td><%= flight.dep.strftime("%B %d, %Y")  %></td>
-              <td><%= flight.dep.strftime('%I:%M:%S %p') %></td>
-              <td><%= flight.from_airport.city %></td>
-              <td><%= flight.to_airport.city %></td>
-            </tr>
-        <% end %>
-      <%= submit_tag "Select Flight", class: "button" %>
+<% if @flights.nil? %>
+<h5>Nothing</h5>>
+	<% else %>
+			<%= render 'flight-list' %>
+<% end %>
+
+
+		<% @allflights.each do |f| %>
+  <h4 class="float-left"><%=f.from_airport.city %></h4> 
+  <h4 class="float-left"><%=f.to_airport.city %></h4>  
+  <p class="clear"><%= f.dep %></p>
+<% end %>
+     
