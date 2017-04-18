@@ -7,8 +7,12 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.create(booking_params)
-    redirect_to root_path   
+    @booking = Booking.new(booking_params)
+    if @booking.save
+      redirect_to booking_path(@booking)
+    else
+      render 'new'
+    end  
   end
 
 
@@ -19,6 +23,6 @@ class BookingsController < ApplicationController
     private
     
     def booking_params
-      params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email] )
+      params.require(:booking).permit(:flight_id, passenger_attributes: [:name, :email] )
     end
 end

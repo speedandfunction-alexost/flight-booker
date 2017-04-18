@@ -4,6 +4,8 @@ class Flight < ApplicationRecord
 
 	  has_many :bookings
 
+	  
+
 	def self.search(params)
       self.where(from_id: params[:from], to_id: params[:to])
 	end
