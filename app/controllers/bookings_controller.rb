@@ -11,6 +11,9 @@ class BookingsController < ApplicationController
     if @booking.save
       booking_params[:passengers_attributes].each do |index, passenger|
         @booking.passengers.create(name: passenger[:name], email: passenger[:email])
+        end
+      @booking.passengers.each do |passenger|
+      PassengerMailer.welcome_email(passenger).deliver_now
       end
       redirect_to booking_path(@booking)
     else
